@@ -1,43 +1,66 @@
 class BichinhoVirtual:
     def __init__(self, nome):
-        self.nome = nome
-        self.fome = 20
-        self.saude = 80
-        self.idade = 1
-    def AlterarNome(self, novoNome):
-        self.nome = novoNome
-    def AlterarFome(self, valorF):
-        self.fome += valorF
-        if self.fome > 100:
-            self.fome = 100
-        elif self.fome < 0:
-            self.fome = 0
-    def AlterarSaude(self, valorS):
-        self.saude += valorS
-        if self.saude > 100:
-            self.saude = 100
-        elif self.saude < 0:
-            self.saude = 0
-    def AlterarIdade(self):
-        self.idade += 1
-    def RetornarNome(self):
-        return self.nome
-    def RetornarFome(self):
-        return self.fome
-    def RetornarSaude(self):
-        return self.saude
-    def RetornarIdade(self):
-        return self.idade
-    def RetornarHumor(self):
-        humor = self.saude + self.fome 
+        self.__nome = nome
+        self.__fome = 20
+        self.__saude = 80
+        self.__idade = 1
+
+    @property
+    def nome(self):
+        return self.__nome
+
+    @property
+    def saude(self):
+        return self.__saude
+
+    @property
+    def fome(self):
+        return self.__fome
+
+    def alterar_nome(self, nome):
+        self.__nome = nome
+
+    def alterar_fome(self, valor_f):
+        self.__fome += valor_f
+        if self.__fome > 100:
+            self.__fome = 100
+        elif self.__fome < 0:
+            self.__fome = 0
+
+    def alterar_saude(self, valor_s):
+        self.__saude += valor_s
+        if self.__saude > 100:
+            self.__saude = 100
+        elif self.__saude < 0:
+            self.__saude = 0
+
+    def alterar_idade(self):
+        self.__idade += 1
+
+    def retornar_nome(self):
+        return self.__nome
+
+    def retornar_fome(self):
+        return self.__fome
+
+    def retornar_saude(self):
+        return self.__saude
+
+    def retornar_idade(self):
+        return self.__idade
+
+    def retornar_humor(self):
+        humor = self.__saude + self.__fome
         return humor
 
-nomeB = input('Qual o nome que deseja colocar no seu bichinho? ')
-Bichinho = BichinhoVirtual(nome = nomeB)
+
+nome_inicial = input('Qual o nome que deseja colocar no seu bichinho? ')
+Bichinho = BichinhoVirtual(nome=nome_inicial)
+
 while (Bichinho.saude > 0) and (Bichinho.fome < 100):
-    Bichinho.AlterarFome(+2)
-    Bichinho.AlterarSaude(-2)
-    Bichinho.AlterarIdade()
+    Bichinho.alterar_fome(+2)
+    Bichinho.alterar_saude(-2)
+    Bichinho.alterar_idade()
     resposta = input(f"""\n------------------------------------------\n __         __
 /  \.-" "-./  \.
 \    -   -    /
@@ -45,25 +68,35 @@ while (Bichinho.saude > 0) and (Bichinho.fome < 100):
  \  .-'''-.  /
   '-\__Y__/-'
      `---`
-     \nOlá meu nome é {Bichinho.nome}. O que você deseja fazer comigo agora? \n1- Alimentar (-10 de fome)\n2- Dormir (+10 de saúde)\n3- Alterar nome\n4- Visualizar humor\n5- Visualizar idade\n6- Visualizar fome\n7- Visualizar saúde\nResposta: """)
+\nOlá meu nome é {Bichinho.nome}. O que você deseja fazer comigo agora?
+1- Alimentar (-10 de fome)
+2- Dormir (+10 de saúde)
+3- Alterar nome
+4- Visualizar humor
+5- Visualizar idade
+6- Visualizar fome
+7- Visualizar saúde
+Resposta: """)
+
     print('\n')
+
     if resposta == '1':
-        Bichinho.AlterarFome(-10)
+        Bichinho.alterar_fome(-10)
         print("-10 de fome! Obrigado!")
     elif resposta == '2':
-        Bichinho.AlterarSaude(+10)
+        Bichinho.alterar_saude(+10)
         print("+10 de saúde! Obrigado!")
     elif resposta == '3':
-        nome2 = input('Qual nome deseja colocar? \n')
-        Bichinho.AlterarNome(nome2)
+        nome_novo = input('Qual nome deseja colocar? \n')
+        Bichinho.alterar_nome(nome_novo)
     elif resposta == '4':
-        print("Humor: ", Bichinho.RetornarHumor())
+        print("Humor: ", Bichinho.retornar_humor())
     elif resposta == '5':
-        print("Idade: ", Bichinho.RetornarIdade())
+        print("Idade: ", Bichinho.retornar_idade())
     elif resposta == '6':
-        print("Fome: ", Bichinho.RetornarFome())
+        print("Fome: ", Bichinho.retornar_fome())
     elif resposta == '7':
-        print("Saude: ", Bichinho.RetornarSaude())
+        print("Saude: ", Bichinho.retornar_saude())
     else:
         print('Escolha um número válido!')
 else:
